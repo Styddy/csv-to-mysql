@@ -13,7 +13,7 @@ namespace CsvToMySql
 
             Console.Title = "CsvToMySql";
 
-            if (args[0].Length > 0)
+            if (args.Length > 0)
             {
                 fileManager.FilePath = args[0];
             }
