@@ -37,7 +37,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DatabaseManager.cs" />
-    <Compile Include="HelperConnection.cs" />
     <Compile Include="FileManager.cs" />
   </ItemGroup>
   <ItemGroup>
