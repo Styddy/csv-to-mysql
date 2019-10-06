@@ -5,6 +5,8 @@ namespace CsvToMySql
 {
     public class DatabaseManager
     {
+        public string ConnectionString { get; set; }
+
         public string TableName { get; set; }
 
         public List<string> ColumnName = new List<string>();
@@ -17,7 +19,7 @@ namespace CsvToMySql
         {
             string sql = $"CREATE TABLE {TableName} (Id int PRIMARY KEY IDENTITY(1,1))";
 
-            using (MySqlConnection connection = new MySqlConnection(HelperConnection.GetConnectionString()))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 connection.Open();
                 using (MySqlCommand command = new MySqlCommand())
@@ -34,7 +36,7 @@ namespace CsvToMySql
         {
             columnName = columnName.Replace(" ", "");
             string sql = $"ALTER TABLE {TableName} ADD {columnName} {dataType}";
-            using (MySqlConnection connection = new MySqlConnection(HelperConnection.GetConnectionString()))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 connection.Open();
                 using (MySqlCommand command = new MySqlCommand())
@@ -50,7 +52,7 @@ namespace CsvToMySql
         {
             columnName = columnName.Replace(" ", "");
             string sql = $"ALTER TABLE {TableName} ADD {columnName} {dataType}({dataSize})";
-            using (MySqlConnection connection = new MySqlConnection(HelperConnection.GetConnectionString()))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 connection.Open();
                 using (MySqlCommand command = new MySqlCommand())
@@ -67,7 +69,7 @@ namespace CsvToMySql
             string verbatimValues = RowToVerbatim(ColumnName);
             string sql = $"INSERT INTO {TableName} VALUES({verbatimValues})";
 
-            using (MySqlConnection connection = new MySqlConnection(HelperConnection.GetConnectionString()))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 connection.Open();
                 using (MySqlCommand command = new MySqlCommand())
