@@ -70,16 +70,15 @@ namespace CsvToMySql
                 } while (error);
             }
 
-            int nRow = fileManager.RowCounter();
+            int nRow = fileManager.RowCounter() - 1;
 
-            for (int i = 1; i < nRow; i++)
+            for (int i = 1; i <= nRow; i++)
             {
                 Console.WriteLine("Loading row {0} of {1}", i, nRow);
                 databaseManager.AddRow(fileManager.RowReader(i));
             }
 
             Console.WriteLine("File loaded successfully.");
-            Console.ReadKey();
         }
     }
 }
