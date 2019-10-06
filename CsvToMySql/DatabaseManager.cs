@@ -179,49 +179,49 @@ namespace CsvToMySql
 
         public MySqlDbType StringToMySqlDbType(string type)
         {
-            return type switch
+            switch(type)
             {
-                "binary" => MySqlDbType.Binary,
-                "bit" => MySqlDbType.Bit,
-                "blob" => MySqlDbType.Blob,
-                "byte" => MySqlDbType.Byte,
-                "date" => MySqlDbType.Date,
-                "datetime" => MySqlDbType.DateTime,
-                "decimal" => MySqlDbType.Decimal,
-                "double" => MySqlDbType.Double,
-                "enum" => MySqlDbType.Enum,
-                "float" => MySqlDbType.Float,
-                "geometry" => MySqlDbType.Geometry,
-                "guid" => MySqlDbType.Guid,
-                "smallint" => MySqlDbType.Int16,
-                "mediumint" => MySqlDbType.Int24,
-                "int" => MySqlDbType.Int32,
-                "bigint" => MySqlDbType.Int64,
-                "json" => MySqlDbType.JSON,
-                "longblob" => MySqlDbType.LongBlob,
-                "longtext" => MySqlDbType.LongText,
-                "mediumblob" => MySqlDbType.MediumBlob,
-                "mediumtext" => MySqlDbType.MediumText,
-                "newdate" => MySqlDbType.Newdate,
-                "newdecimal" => MySqlDbType.NewDecimal,
-                "set" => MySqlDbType.Set,
-                "string" => MySqlDbType.String,
-                "text" => MySqlDbType.Text,
-                "time" => MySqlDbType.Time,
-                "timestamp" => MySqlDbType.Timestamp,
-                "tinyblob" => MySqlDbType.TinyBlob,
-                "tinytext" => MySqlDbType.TinyText,
-                "unsignedbyte" => MySqlDbType.UByte,
-                "unsignedsmallint" => MySqlDbType.UInt16,
-                "unsignedmediumint" => MySqlDbType.UInt24,
-                "unsignedint" => MySqlDbType.UInt32,
-                "unsignedbigint" => MySqlDbType.UInt64,
-                "varbinary" => MySqlDbType.VarBinary,
-                "varchar" => MySqlDbType.VarChar,
-                "varstring" => MySqlDbType.VarString,
-                "year" => MySqlDbType.Year,
-                _ => 0,
-            };
+                case "binary": return MySqlDbType.Binary;
+                case "bit": return MySqlDbType.Bit;
+                case "blob": return MySqlDbType.Blob;
+                case "byte": return MySqlDbType.Byte;
+                case "date": return MySqlDbType.Date;
+                case "datetime": return MySqlDbType.DateTime;
+                case "decimal": return MySqlDbType.Decimal;
+                case "double": return MySqlDbType.Double;
+                case "enum": return MySqlDbType.Enum;
+                case "float": return MySqlDbType.Float;
+                case "geometry": return MySqlDbType.Geometry;
+                case "guid": return MySqlDbType.Guid;
+                case "smallint": return MySqlDbType.Int16;
+                case "mediumint": return MySqlDbType.Int24;
+                case "int": return MySqlDbType.Int32;
+                case "bigint": return MySqlDbType.Int64;
+                case "json": return MySqlDbType.JSON;
+                case "longblob": return MySqlDbType.LongBlob;
+                case "longtext": return MySqlDbType.LongText;
+                case "mediumblob": return MySqlDbType.MediumBlob;
+                case "mediumtext": return MySqlDbType.MediumText;
+                case "newdate": return MySqlDbType.Newdate;
+                case "newdecimal": return MySqlDbType.NewDecimal;
+                case "set": return MySqlDbType.Set;
+                case "string": return MySqlDbType.String;
+                case "text": return MySqlDbType.Text;
+                case "time": return MySqlDbType.Time;
+                case "timestamp": return MySqlDbType.Timestamp;
+                case "tinyblob": return MySqlDbType.TinyBlob;
+                case "tinytext": return MySqlDbType.TinyText;
+                case "unsignedbyte": return MySqlDbType.UByte;
+                case "unsignedsmallint": return MySqlDbType.UInt16;
+                case "unsignedmediumint": return MySqlDbType.UInt24;
+                case "unsignedint": return MySqlDbType.UInt32;
+                case "unsignedbigint": return MySqlDbType.UInt64;
+                case "varbinary": return MySqlDbType.VarBinary;
+                case "varchar": return MySqlDbType.VarChar;
+                case "varstring": return MySqlDbType.VarString;
+                case "year": return MySqlDbType.Year;
+                default: return 0;
+            }
         }
     }
 }
