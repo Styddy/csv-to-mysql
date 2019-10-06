@@ -51,8 +51,8 @@ namespace CsvToMySql
 
         private List<string> SplitRow(string row)
         {
-            string[] es = row.Split(';');
-            List<string> rowSplitted = es.OfType<string>().ToList();
+            string[] rowSplittedTemp = row.Split(';');
+            List<string> rowSplitted = rowSplittedTemp.OfType<string>().ToList();
             rowSplitted.RemoveAt(rowSplitted.Count - 1);
             return rowSplitted;
         }
