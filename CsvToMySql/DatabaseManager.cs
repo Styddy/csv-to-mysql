@@ -17,7 +17,7 @@ namespace CsvToMySql
 
         public void CreateTable()
         {
-            string sql = $"CREATE TABLE {TableName} (Id int PRIMARY KEY IDENTITY(1,1))";
+            string sql = $"CREATE TABLE {TableName} (Id int NOT NULL AUTO_INCREMENT, PRIMARY KEY(Id))";
 
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
@@ -66,8 +66,11 @@ namespace CsvToMySql
 
         public void AddRow(List<string> rowElements)
         {
+            string columnName = GetColumnNameString(ColumnName);
             string verbatimValues = RowToVerbatim(ColumnName);
-            string sql = $"INSERT INTO {TableName} VALUES({verbatimValues})";
+
+
+            string sql = $"INSERT INTO {TableName} ({columnName}) VALUES({verbatimValues})";
 
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
@@ -80,12 +83,12 @@ namespace CsvToMySql
                     int i = 0;
                     foreach (string element in ColumnName)
                     {
-                        MySqlParameter sqlParameter = new MySqlParameter();
-                        sqlParameter.ParameterName = '@' + element;
-                        sqlParameter.MySqlDbType = ColumnDataType[i];
-                        sqlParameter.Value = rowElements[i];
-                        sqlParameter.Size = ColumnDataSize[i];
-                        command.Parameters.Add(sqlParameter);
+                        MySqlParameter mySqlParameter = new MySqlParameter();
+                        mySqlParameter.ParameterName = '@' + element;
+                        mySqlParameter.MySqlDbType = ColumnDataType[i];
+                        mySqlParameter.Value = rowElements[i];
+                        mySqlParameter.Size = ColumnDataSize[i];
+                        command.Parameters.Add(mySqlParameter);
                         i++;
                     }
                     command.Connection = connection;
@@ -94,6 +97,25 @@ namespace CsvToMySql
                 }
                 connection.Close();
             }
+        }
+
+        private string GetColumnNameString(List<string> columnName)
+        {
+            string columnNameString = "";
+            int i = 1;
+            foreach(string name in columnName)
+            {
+                if (i != columnName.Count)
+                {
+                    columnNameString += name + ", ";
+                }
+                else
+                {
+                    columnNameString += name;
+                }
+                i++;
+            }
+            return columnNameString;
         }
 
         private string RowToVerbatim(List<string> rowElements)
