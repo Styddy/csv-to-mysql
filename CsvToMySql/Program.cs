@@ -7,6 +7,7 @@ namespace CsvToMySql
     {
         public static void Main(string[] args)
         {
+            string tableName;
             List<string> columns;
             FileManager fileManager = new FileManager();
             DatabaseManager databaseManager = new DatabaseManager();
@@ -19,16 +20,59 @@ namespace CsvToMySql
             }
             else
             {
-                Console.Write("Paste the .csv path: ");
-                fileManager.FilePath = Console.ReadLine();
+                do
+                {
+                    string filePath;
+                    Console.Write("Paste the .csv path: ");
+                    filePath = Console.ReadLine();
+
+                    if (fileManager.IsValidFilePath(filePath))
+                    {
+                        fileManager.FilePath = filePath;
+                        break;
+                    }
+                    Console.WriteLine("The file in the specified path does not exist!");
+                } while (true);
+                
             }
 
-            Console.Write("Paste the database connection string: ");
-            databaseManager.ConnectionString = Console.ReadLine();
+            do
+            {
+                string connectionString;
+                Console.Write("Paste the database connection string: ");
+                connectionString = Console.ReadLine();
 
-            Console.Write("Enter the table name: ");
-            databaseManager.TableName = Console.ReadLine();
-            databaseManager.CreateTable();
+                if (databaseManager.IsValidConnectionString(connectionString))
+                {
+                    databaseManager.ConnectionString = connectionString;
+                    break;
+                }
+                Console.WriteLine("Indicated string is not valid!");
+            } while (true);
+
+            do
+            {
+                Console.Write("Enter the table name: ");
+                tableName = Console.ReadLine();
+
+                if (databaseManager.IsValidTableName(tableName))
+                {
+                    Console.WriteLine("Invalid table name!");
+                }
+                else
+                {
+                    try
+                    {
+                        databaseManager.TableName = tableName;
+                        databaseManager.CreateTable();
+                        break;
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+            } while (true);
 
             columns = fileManager.RowReader(0);
 
