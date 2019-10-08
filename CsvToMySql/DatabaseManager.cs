@@ -15,6 +15,33 @@ namespace CsvToMySql
 
         public List<int> ColumnDataSize = new List<int>();
 
+        public bool IsValidConnectionString(string connectionString)
+        {
+            bool isValidConnectionString;
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    isValidConnectionString = true;
+                }
+            }
+            catch
+            {
+                isValidConnectionString = false;
+            }
+            return isValidConnectionString;
+        }
+
+        public bool IsValidTableName(string tableName)
+        {
+            if (tableName == "")
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void CreateTable()
         {
             string sql = $"CREATE TABLE {TableName} (Id int NOT NULL AUTO_INCREMENT, PRIMARY KEY(Id))";
