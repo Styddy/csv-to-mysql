@@ -33,7 +33,6 @@ namespace CsvToMySql
                     }
                     Console.WriteLine("The file in the specified path does not exist!");
                 } while (true);
-                
             }
 
             do
@@ -67,7 +66,7 @@ namespace CsvToMySql
                         databaseManager.CreateTable();
                         break;
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
                     }
@@ -115,14 +114,19 @@ namespace CsvToMySql
             }
 
             int nRow = fileManager.RowCounter() - 1;
-
-            for (int i = 1; i <= nRow; i++)
+            try
             {
-                Console.WriteLine("Loading row {0} of {1}", i, nRow);
-                databaseManager.AddRow(fileManager.RowReader(i));
+                for (int i = 1; i <= nRow; i++)
+                {
+                    Console.WriteLine("Loading row {0} of {1}", i, nRow);
+                    databaseManager.AddRow(fileManager.RowReader(i));
+                }
+                Console.WriteLine("File loaded successfully.");
             }
-
-            Console.WriteLine("File loaded successfully.");
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
