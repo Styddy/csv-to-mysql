@@ -130,7 +130,7 @@ namespace CsvToMySql
         {
             string columnNameString = "";
             int i = 1;
-            foreach(string name in columnName)
+            foreach (string name in columnName)
             {
                 if (i != columnName.Count)
                 {
@@ -228,7 +228,7 @@ namespace CsvToMySql
 
         public MySqlDbType StringToMySqlDbType(string type)
         {
-            switch(type)
+            switch (type)
             {
                 case "binary": return MySqlDbType.Binary;
                 case "bit": return MySqlDbType.Bit;
