@@ -8,6 +8,14 @@ namespace CsvToMySql
     {
         public string FilePath { get; set; }
 
+        public bool IsValidFilePath(string filePath)
+        {
+            if (File.Exists(filePath))
+                return true;
+
+            return false;
+        }
+
         public List<string> RowReader(int pos)
         {
             string row;
